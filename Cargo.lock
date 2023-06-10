@@ -547,6 +547,7 @@ dependencies = [
 name = "avtan-runtime"
 version = "0.1.0"
 dependencies = [
+ "common",
  "cumulus-pallet-aura-ext",
  "cumulus-pallet-dmp-queue",
  "cumulus-pallet-parachain-system",
@@ -1200,7 +1201,6 @@ dependencies = [
 name = "common"
 version = "0.1.0"
 dependencies = [
- "clap",
  "parity-scale-codec",
  "scale-info",
  "serde",

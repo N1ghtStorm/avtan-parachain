@@ -12,7 +12,7 @@ edition = "2021"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [build-dependencies]
-substrate-wasm-builder = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.42" }
+substrate-wasm-builder = { git = "https://github.com/paritytech/substrate", optional = true, branch = "polkadot-v0.9.42" }
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
@@ -22,7 +22,7 @@ scale-info = { version = "2.5.0", default-features = false, features = ["derive"
 smallvec = "1.10.0"
 
 # Local
-# common = { path = "../common" }
+common = { path = "../common", default-features = false }
 
 # Substrate
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, optional = true, branch = "polkadot-v0.9.42" }
@@ -87,6 +87,7 @@ std = [
 	"codec/std",
 	"log/std",
 	"scale-info/std",
+	"common/std",
 	"cumulus-pallet-aura-ext/std",
 	"cumulus-pallet-dmp-queue/std",
 	"cumulus-pallet-parachain-system/std",

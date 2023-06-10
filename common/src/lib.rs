@@ -20,6 +20,7 @@ use sp_runtime::scale_info::TypeInfo;
 #[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
 pub enum TokenId {
     AVA,
+    KSM,
     Sora(SoraToken),
 }
 

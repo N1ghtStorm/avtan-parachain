@@ -219,5 +219,6 @@ fn testnet_genesis(
         polkadot_xcm: avtan_runtime::PolkadotXcmConfig { safe_xcm_version: Some(SAFE_XCM_VERSION) },
         transaction_payment: Default::default(),
         sudo: avtan_runtime::SudoConfig { key: Some(root_key) },
+        tokens: Default::default(),
     }
 }

@@ -25,6 +25,7 @@ use sp_std::prelude::*;
 use sp_version::NativeVersion;
 use sp_version::RuntimeVersion;
 
+use common::TokenId;
 use frame_support::{
     construct_runtime,
     dispatch::DispatchClass,
@@ -66,6 +67,7 @@ pub type AccountId = <<Signature as Verify>::Signer as IdentifyAccount>::Account
 
 /// Balance of an account.
 pub type Balance = u128;
+pub type Amount = i128;
 
 /// Index of a transaction in the chain.
 pub type Index = u32;
@@ -458,6 +460,26 @@ impl pallet_sudo::Config for Runtime {
     type RuntimeCall = RuntimeCall;
 }
 
+orml_traits::parameter_type_with_key! {
+    pub ExistentialDeposits: |_currency_id: TokenId| -> Balance {
+        Default::default()
+    };
+}
+
+impl orml_tokens::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type Balance = Balance;
+    type Amount = Amount;
+    type CurrencyId = TokenId;
+    type WeightInfo = ();
+    type ExistentialDeposits = ExistentialDeposits;
+    type CurrencyHooks = ();
+    type MaxLocks = ConstU32<50>;
+    type MaxReserves = ConstU32<50>;
+    type ReserveIdentifier = [u8; 8];
+    type DustRemovalWhitelist = Everything;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
     pub enum Runtime where
@@ -489,6 +511,8 @@ construct_runtime!(
         DmpQueue: cumulus_pallet_dmp_queue = 33,
 
         Sudo: pallet_sudo = 41,
+
+        Tokens: orml_tokens = 50,
     }
 );
 

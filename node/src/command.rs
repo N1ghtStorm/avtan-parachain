@@ -5,7 +5,7 @@ use cumulus_client_cli::generate_genesis_block;
 use cumulus_primitives_core::ParaId;
 use frame_benchmarking_cli::{BenchmarkCmd, SUBSTRATE_REFERENCE_HARDWARE};
 use log::{info, warn};
-use parachain_template_runtime::Block;
+use avtan_runtime::Block;
 use sc_cli::{
 	ChainSpec, CliConfiguration, DefaultConfigurationValues, ImportParams, KeystoreParams,
 	NetworkParams, Result, RuntimeVersion, SharedParams, SubstrateCli,
@@ -65,7 +65,7 @@ impl SubstrateCli for Cli {
 	}
 
 	fn native_runtime_version(_: &Box<dyn ChainSpec>) -> &'static RuntimeVersion {
-		&parachain_template_runtime::VERSION
+		&avtan_runtime::VERSION
 	}
 }
 
@@ -262,7 +262,7 @@ pub fn run() -> Result<()> {
 			You can enable it with `--features try-runtime`."
 			.into()),
 		None => {
-			info!(
+			println!(
 				"
 								░░░░░░░░▄▀▀▄
 								░░░░░▄▀▒▒▒▒▀▄
@@ -281,9 +281,9 @@ pub fn run() -> Result<()> {
 								░░░░░░░░░▄▄▌▌▄▌▌
 			"
 			);
-			info!(
-				"                           🦀🐔🐔🐔🐔🐔🐔🐔🐔🦀
-							Avtan parachain starting KO KO KO",
+			println!(
+				"                           			🦀🐔🐔🐔🐔🐔🐔🐔🐔🦀
+							Avtan parachain is starting KO KO KO",
 			);
 
 			let runner = cli.create_runner(&cli.run.normalize())?;

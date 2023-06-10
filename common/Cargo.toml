@@ -1,0 +1,32 @@
+[package]
+name = "common"
+version = "0.1.0"
+authors = ["Anonymous"]
+description = "Rooster parachain KOKOKOKOKOKOKOKOKOKO"
+license = "Unlicense"
+homepage = "https://substrate.io"
+repository = "https://github.com/paritytech/cumulus/"
+edition = "2021"
+# build = "build.rs"
+
+[dependencies]
+clap = { version = "4.2.3", features = ["derive"] }
+# log = "0.4.17"
+codec = { package = "parity-scale-codec", version = "3.0.0" }
+serde = { version = "1.0.160", features = ["derive"], optional = true }
+# jsonrpsee = { version = "0.16.2", features = ["server"] }
+scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.42" }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.42" }
+
+[features]
+default = [
+	"std",
+]
+std = [
+	"codec/std",
+	"scale-info/std",
+	"serde",
+	"sp-core/std",
+	"sp-runtime/std",
+]

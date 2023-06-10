@@ -17,7 +17,7 @@ use sp_runtime::scale_info::TypeInfo;
     codec::MaxEncodedLen,
     TypeInfo,
 )]
-// #[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
 pub enum TokenId {
     AVTN,
     Sora(SoraToken),
@@ -36,7 +36,7 @@ pub enum TokenId {
     codec::MaxEncodedLen,
     TypeInfo,
 )]
-// #[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
 pub enum SoraToken {
     XOR,
     VAL,

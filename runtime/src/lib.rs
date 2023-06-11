@@ -514,6 +514,7 @@ construct_runtime!(
         Sudo: pallet_sudo = 41,
 
         Tokens: orml_tokens = 50,
+        XTokens: orml_xtokens = 51,
     }
 );
 

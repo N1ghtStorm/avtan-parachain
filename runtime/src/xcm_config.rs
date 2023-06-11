@@ -3,6 +3,7 @@ use super::{
     Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue,
 };
 use core::{marker::PhantomData, ops::ControlFlow};
+use common::TokenId;
 use frame_support::{
     log, match_types, parameter_types,
     traits::{ConstU32, Everything, Nothing, ProcessMessageError},
@@ -22,6 +23,8 @@ use xcm_builder::{
 };
 use xcm_executor::{traits::ShouldExecute, XcmExecutor};
 use crate::tokens_convert::AvtanTakenConverter;
+use orml_traits::location::AbsoluteReserveProvider;
+use sp_core::Get;
 
 parameter_types! {
     pub const RelayLocation: MultiLocation = MultiLocation::parent();
@@ -253,4 +256,47 @@ impl pallet_xcm::Config for Runtime {
 impl cumulus_pallet_xcm::Config for Runtime {
     type RuntimeEvent = RuntimeEvent;
     type XcmExecutor = XcmExecutor<XcmConfig>;
+}
+
+parameter_types! {
+    pub SelfLocation: MultiLocation = MultiLocation::new(1, X1(Parachain(ParachainInfo::get().into())));
+}
+
+parameter_types! {
+    pub const BaseXcmWeight: Weight = Weight::from_parts(100_000_000, 0);
+    pub const MaxAssetsForTransfer: usize = 2;
+}
+
+orml_traits::parameter_type_with_key! {
+    pub ParachainMinFee: |location: MultiLocation| -> Option<u128> {
+        #[allow(clippy::match_ref_pats)] // false positive
+        match (location.parents, location.first_interior()) {
+            (1, Some(_)) => Some(1_000_000),
+            _ => None,
+        }
+    };
+}
+
+pub struct AccountIdToMultiLocation;
+impl sp_runtime::traits::Convert<AccountId, MultiLocation> for AccountIdToMultiLocation {
+    fn convert(account: AccountId) -> MultiLocation {
+        X1(AccountId32 { network: None, id: account.into() }).into()
+    }
+}
+
+impl orml_xtokens::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type Balance = crate::Balance;
+    type CurrencyId = TokenId;
+    type CurrencyIdConvert = AvtanTakenConverter;
+    type AccountIdToMultiLocation = AccountIdToMultiLocation;
+    type SelfLocation = SelfLocation;
+    type XcmExecutor = XcmExecutor<XcmConfig>;
+    type Weigher = FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
+    type BaseXcmWeight = BaseXcmWeight;
+    type MaxAssetsForTransfer = MaxAssetsForTransfer;
+    type MinXcmFee = ParachainMinFee;
+    type MultiLocationsFilter = Everything;
+    type ReserveProvider = AbsoluteReserveProvider;
+    type UniversalLocation = UniversalLocation;
 }

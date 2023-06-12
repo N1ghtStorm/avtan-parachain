@@ -17,13 +17,13 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
-mod models;
+mod player;
 
 pub use pallet::*;
 
 #[frame_support::pallet]
 pub mod pallet {
-    pub use crate::models::*;
+    pub use crate::player::*;
     use frame_support::{dispatch::DispatchResultWithPostInfo, pallet_prelude::*};
     use frame_system::pallet_prelude::*;
 

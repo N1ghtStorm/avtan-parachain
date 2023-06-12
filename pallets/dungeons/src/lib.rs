@@ -55,20 +55,9 @@ pub mod pallet {
     impl<T: Config> Pallet<T> {
         #[pallet::call_index(0)]
         #[pallet::weight(Weight::from_parts(10_000, 0) + T::DbWeight::get().writes(1))]
-        pub fn do_something(
-            origin: OriginFor<T>,
-            something: u32,
-            acc: T::AccountId,
-        ) -> DispatchResultWithPostInfo {
-            let who = ensure_signed(origin)?;
+        pub fn venture_the_dungeon(origin: OriginFor<T>) -> DispatchResultWithPostInfo {
+            let _ = ensure_signed(origin)?;
             Ok(().into())
-        }
-
-        #[pallet::call_index(1)]
-        #[pallet::weight(Weight::from_parts(10_000, 0) + T::DbWeight::get().reads_writes(1,1))]
-        pub fn cause_error(origin: OriginFor<T>) -> DispatchResultWithPostInfo {
-            let _who = ensure_signed(origin)?;
-            todo!()
         }
     }
 }

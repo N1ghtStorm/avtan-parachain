@@ -23,6 +23,7 @@ pub use pallet::*;
 
 #[frame_support::pallet]
 pub mod pallet {
+    pub use crate::models::*;
     use frame_support::{dispatch::DispatchResultWithPostInfo, pallet_prelude::*};
     use frame_system::pallet_prelude::*;
 
@@ -32,11 +33,13 @@ pub mod pallet {
     }
 
     #[pallet::pallet]
+    #[pallet::without_storage_info]
     pub struct Pallet<T>(_);
 
     #[pallet::storage]
     #[pallet::getter(fn account_player_data)]
-    pub type AccountPlayerData<T> = StorageValue<_, u32>;
+    pub type AccountPlayerData<T: Config> =
+        StorageMap<_, Blake2_128Concat, T::AccountId, PlayerData, OptionQuery>;
 
     #[pallet::event]
     #[pallet::generate_deposit(pub(super) fn deposit_event)]
@@ -52,7 +55,11 @@ pub mod pallet {
     impl<T: Config> Pallet<T> {
         #[pallet::call_index(0)]
         #[pallet::weight(Weight::from_parts(10_000, 0) + T::DbWeight::get().writes(1))]
-        pub fn do_something(origin: OriginFor<T>, something: u32) -> DispatchResultWithPostInfo {
+        pub fn do_something(
+            origin: OriginFor<T>,
+            something: u32,
+            acc: T::AccountId,
+        ) -> DispatchResultWithPostInfo {
             let who = ensure_signed(origin)?;
             Ok(().into())
         }

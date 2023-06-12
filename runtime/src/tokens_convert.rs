@@ -1,6 +1,23 @@
+//                                                   ~-.
+//                                                   ,,,;            ~-.~-.~-
+//                                               (.../           ~-.~-.~-.~-.~-.
+//                                           < } O~`, ,        ~-.~-.~-.~-.~-.~-.
+//                                               (/    T ,     ~-.~-.~-.~-.~-.~-.~-.
+//                                                   ;    T     ~-.~-.~-.~-.~-.~-.~-.
+//                                                 ;   {_.~-.~-.~-.~-.~-.~-.~
+//                                               ;:  .-~`    ~-.~-.~-.~-.~-.
+//                                               ;.: :'    ._   ~-.~-.~-.~-.~-
+//                                               ;::`-.    '-._  ~-.~-.~-.~-
+//                                               ;::. `-.    '-,~-.~-.~-.
+//                                                   ';::::.`''-.-'
+//                                                   ';::;;:,:'
+//                                                       '||T
+//                                                     __   _
+//                                                       / |
+
 use common::*;
-use sp_runtime::traits::Convert;
 use hex_literal::hex;
+use sp_runtime::traits::Convert;
 use xcm::prelude::*;
 
 const AVA: [u8; 32] = hex!("0100000000000000000000000000000000000000000000000000000000000000");
@@ -13,22 +30,18 @@ impl Convert<TokenId, Option<MultiLocation>> for AvtanTakenConverter {
     fn convert(id: TokenId) -> Option<MultiLocation> {
         match id {
             TokenId::KSM => Some(Parent.into()),
-            TokenId::AVA => Some(
-                (Parent, Parachain(2666), GeneralKey { length: 32, data: AVA })
-                    .into(),
-            ),
-            TokenId::Sora(SoraToken::XOR) => Some(
-                (Parent, Parachain(2011), GeneralKey { length: 32, data: XOR })
-                    .into(),
-            ),
-            TokenId::Sora(SoraToken::VAL) => Some(
-                (Parent, Parachain(2011), GeneralKey { length: 32, data: VAL })
-                    .into(),
-            ),
-            TokenId::Sora(SoraToken::XSTUSD) => Some(
-                (Parent, Parachain(2011), GeneralKey { length: 32, data: XSTUSD })
-                    .into(),
-            ),
+            TokenId::AVA => {
+                Some((Parent, Parachain(2666), GeneralKey { length: 32, data: AVA }).into())
+            },
+            TokenId::Sora(SoraToken::XOR) => {
+                Some((Parent, Parachain(2011), GeneralKey { length: 32, data: XOR }).into())
+            },
+            TokenId::Sora(SoraToken::VAL) => {
+                Some((Parent, Parachain(2011), GeneralKey { length: 32, data: VAL }).into())
+            },
+            TokenId::Sora(SoraToken::XSTUSD) => {
+                Some((Parent, Parachain(2011), GeneralKey { length: 32, data: XSTUSD }).into())
+            },
         }
     }
 }

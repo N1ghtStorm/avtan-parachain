@@ -1,3 +1,20 @@
+//                                                   ~-.
+//                                                   ,,,;            ~-.~-.~-
+//                                               (.../           ~-.~-.~-.~-.~-.
+//                                           < } O~`, ,        ~-.~-.~-.~-.~-.~-.
+//                                               (/    T ,     ~-.~-.~-.~-.~-.~-.~-.
+//                                                   ;    T     ~-.~-.~-.~-.~-.~-.~-.
+//                                                 ;   {_.~-.~-.~-.~-.~-.~-.~
+//                                               ;:  .-~`    ~-.~-.~-.~-.~-.
+//                                               ;.: :'    ._   ~-.~-.~-.~-.~-
+//                                               ;::`-.    '-._  ~-.~-.~-.~-
+//                                               ;::. `-.    '-,~-.~-.~-.
+//                                                   ';::::.`''-.-'
+//                                                   ';::;;:,:'
+//                                                       '||T
+//                                                     __   _
+//                                                       / |
+
 #![cfg_attr(not(feature = "std"), no_std)]
 // `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
 #![recursion_limit = "256"]
@@ -6,8 +23,8 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
-mod weights;
 pub mod tokens_convert;
+mod weights;
 pub mod xcm_config;
 
 use cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;

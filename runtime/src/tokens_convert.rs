@@ -25,8 +25,8 @@ const XOR: [u8; 32] = hex!("0200000000000000000000000000000000000000000000000000
 const VAL: [u8; 32] = hex!("0200040000000000000000000000000000000000000000000000000000000000");
 const XSTUSD: [u8; 32] = hex!("0200080000000000000000000000000000000000000000000000000000000000");
 
-pub struct AvtanTakenConverter;
-impl Convert<TokenId, Option<MultiLocation>> for AvtanTakenConverter {
+pub struct AvtanTokenConverter;
+impl Convert<TokenId, Option<MultiLocation>> for AvtanTokenConverter {
     fn convert(id: TokenId) -> Option<MultiLocation> {
         match id {
             TokenId::KSM => Some(Parent.into()),
@@ -46,7 +46,7 @@ impl Convert<TokenId, Option<MultiLocation>> for AvtanTakenConverter {
     }
 }
 
-impl Convert<MultiLocation, Option<TokenId>> for AvtanTakenConverter {
+impl Convert<MultiLocation, Option<TokenId>> for AvtanTokenConverter {
     fn convert(l: MultiLocation) -> Option<TokenId> {
         if l == MultiLocation::parent() {
             return Some(TokenId::KSM);
@@ -81,7 +81,7 @@ impl Convert<MultiLocation, Option<TokenId>> for AvtanTakenConverter {
     }
 }
 
-impl Convert<MultiAsset, Option<TokenId>> for AvtanTakenConverter {
+impl Convert<MultiAsset, Option<TokenId>> for AvtanTokenConverter {
     fn convert(a: MultiAsset) -> Option<TokenId> {
         if let MultiAsset { fun: Fungible(_), id: Concrete(id) } = a {
             Self::convert(id)

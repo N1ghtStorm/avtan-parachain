@@ -49,10 +49,6 @@ impl PlayerData {
         }
     }
 
-    pub fn new_with() -> Self {
-        Self { heroes: Vec::new(), current_gold: 0 }
-    }
-
     pub fn heroes(&self) -> &Vec<Hero> {
         &self.heroes
     }

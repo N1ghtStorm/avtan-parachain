@@ -24,5 +24,14 @@ pub struct Dungeon {
 }
 
 pub enum DungeonType {
+    HumanTerritory,
+    ElfTerritory,
+}
+
+pub enum HumanDungeon {
+    OldRuins,
+}
+
+pub enum ElfDungeon {
     SpiderDen,
 }

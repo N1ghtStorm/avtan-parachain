@@ -19,7 +19,7 @@ use super::{
     AccountId, AllPalletsWithSystem, Balances, ParachainInfo, ParachainSystem, PolkadotXcm,
     Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue,
 };
-use crate::tokens_convert::AvtanTakenConverter;
+use crate::tokens_convert::AvtanTokenConverter;
 use common::TokenId;
 use core::{marker::PhantomData, ops::ControlFlow};
 use frame_support::{
@@ -66,11 +66,11 @@ pub type LocationToAccountId = (
 pub type AssetTransactor = orml_xcm_support::MultiCurrencyAdapter<
     crate::Tokens,
     (),
-    orml_xcm_support::IsNativeConcrete<common::TokenId, AvtanTakenConverter>,
+    orml_xcm_support::IsNativeConcrete<common::TokenId, AvtanTokenConverter>,
     AccountId,
     LocationToAccountId,
     common::TokenId,
-    AvtanTakenConverter,
+    AvtanTokenConverter,
     (),
 >;
 
@@ -304,7 +304,7 @@ impl orml_xtokens::Config for Runtime {
     type RuntimeEvent = RuntimeEvent;
     type Balance = crate::Balance;
     type CurrencyId = TokenId;
-    type CurrencyIdConvert = AvtanTakenConverter;
+    type CurrencyIdConvert = AvtanTokenConverter;
     type AccountIdToMultiLocation = AccountIdToMultiLocation;
     type SelfLocation = SelfLocation;
     type XcmExecutor = XcmExecutor<XcmConfig>;

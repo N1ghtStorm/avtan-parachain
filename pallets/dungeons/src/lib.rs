@@ -35,8 +35,8 @@ pub mod pallet {
     pub struct Pallet<T>(_);
 
     #[pallet::storage]
-    #[pallet::getter(fn something)]
-    pub type Something<T> = StorageValue<_, u32>;
+    #[pallet::getter(fn account_player_data)]
+    pub type AccountPlayerData<T> = StorageValue<_, u32>;
 
     #[pallet::event]
     #[pallet::generate_deposit(pub(super) fn deposit_event)]

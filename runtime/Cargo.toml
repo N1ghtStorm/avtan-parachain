@@ -23,6 +23,7 @@ smallvec = "1.10.0"
 
 # Local
 common = { path = "../common", default-features = false }
+pallet-dungeons = { path = "../pallets/dungeons", default-features = false }
 
 # Substrate
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, optional = true, branch = "polkadot-v0.9.42" }
@@ -114,6 +115,7 @@ std = [
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
 	"pallet-xcm/std",
+	"pallet-dungeons/std",
 	"parachain-info/std",
 	"polkadot-parachain/std",
 	"polkadot-runtime-common/std",

@@ -574,6 +574,7 @@ dependencies = [
  "pallet-authorship",
  "pallet-balances",
  "pallet-collator-selection",
+ "pallet-dungeons",
  "pallet-session",
  "pallet-sudo",
  "pallet-timestamp",
